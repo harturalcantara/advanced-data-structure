@@ -1,2 +1,2 @@
-# ufc-eda2
+# ufc-eda
 Implementações EDA
