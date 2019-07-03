@@ -1,5 +1,7 @@
 package br.ufc.crateus.eda.hash;
 
+import java.util.LinkedList;
+
 public class SeparateChainingHashMap<K, V > implements Map<K, V> {
 	
 	private static class Node{
@@ -29,6 +31,8 @@ public class SeparateChainingHashMap<K, V > implements Map<K, V> {
 	private int hash(K key) {
 		return (key.hashCode() & 0x7fffffff) % table.length;
 	}
+	
+	//retorna key.hashCode() -> -2³² <= 2³² -1	+'
 	
 	private Node getNode(K key) {
 		if(key == null) return null;
@@ -93,18 +97,21 @@ public class SeparateChainingHashMap<K, V > implements Map<K, V> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Iterable<K> keys() {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<K> list = new LinkedList<K>();
+		
+		for(int i = 0; i < table.length; i++) {
+			if(table[i] != null)
+				list.add((K) table[i].key);
+		}
+		return list;
 	}
 
 	@Override
 	public boolean contains(K key) {
 		return (get(key) != null)? true : false;
 	}
-	
-	
-	
 	
 }
